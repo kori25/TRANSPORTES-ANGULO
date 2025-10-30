@@ -596,13 +596,27 @@ main {
 /* Ajuste del header y logo en móvil */
 @media (max-width: 480px) {
   header {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;           /* 👈 mantiene logo e icono en la misma línea */
+    justify-content: space-between;/* 👈 empuja el ícono del menú a la derecha */
+    align-items: center;
     padding: 1rem;
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   header h1 {
     font-size: 1.3rem;
+  }
+
+  .menu-toggle {
+    display: block;
+    font-size: 2rem;
+    color: rgb(178,34,34);
+    margin-left: auto;             /* 👈 asegura que se pegue a la derecha */
   }
 
   .logo {
@@ -613,6 +627,7 @@ main {
     font-size: 0.9rem;
   }
 }
+
 
 /* Ajuste de la ilustración en la sección de contacto */
 @media (max-width: 768px) {
@@ -862,3 +877,4 @@ header {
 
 </body>
 </html>
+
