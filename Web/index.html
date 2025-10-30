@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Transportes Angulo - Mudanzas y Acarreos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset and base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Nunito Sans', sans-serif;
+      background-color: rgb(255, 255, 255);
+      color: #fff;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      margin: 0px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: rgb(178,34,34);
+    }
+
+    header {
+      width: 100%;
+      max-width: 100%;
+      background-color: rgb(255, 255, 255);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+	  
+    header h1 {
+      font-weight: 00;
+      font-size: 1.5rem;
+      color: rgb(178,34,34);
+      letter-spacing: 2px;
+      text-align: left; /* Alinea el texto a la izquierda */
+      padding-left: 10px;
+      margin: 0;
+    }
+    nav {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* En móvil, pasa el menú debajo del logo */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    margin-left: 0;
+    align-items: flex-start;
+    width: 100%;
+    gap: 0.5rem;
+    padding-top: 1rem;
+  }
+}
+    nav a {
+      font-weight: 600;
+      font-size: 1rem;
+      color: rgb(178,34,34);
+      padding: 0.3rem 0.7rem;
+      border-radius: 4px;
+    }
+    nav a:hover {
+      background-color: rgb(126, 16, 16);
+      color: #ffffff;
+    }
+
+    main {
+    width: 100%;
+    max-width: 1200px;
+    margin: 2rem auto 4rem;
+    padding: 2rem;
+    }
+
+    .hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end; /* 👈 fuerza que todo se alinee a la derecha */
+    gap: 1.5rem;
+    }
+    .hero-text {
+      flex: 1 1 320px;
+      max-width: 540px;
+    }
+    .hero-text h2 {
+      font-weight: 900;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: rgb(178,34,34);
+    }
+    .hero-text p {
+      font-weight: 400;
+      font-size: 1.1rem;
+      margin-bottom: 1.3rem;
+      color: #000000;
+    }
+@media (max-width: 480px) {
+  .hero-text h2 {
+    font-size: 1.8rem;
+  }
+
+  .hero-text p {
+    font-size: 1rem;
+  }
+}
+    .hero-image {
+    max-width: 650px;
+    margin-left: auto;  /* empuja a la derecha */
+    right: 0px;
+    }
+
+    .hero-image img {
+	  max-width: 100%;
+	  height: auto;
+      display: block;
+      right: 0px;
+      margin: 0px;
+      
+    }
+	  @media (min-width: 1024px) {
+  .hero-image {
+    margin-right: -2rem; /* si aún deseas ese efecto en pantallas grandes */
+	
+  }
+}
+
+.services {
+  margin-top: 3rem;
+  text-align: center;
+}
+.services h3 {
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: rgb(178,34,34);
+}
+.service-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+.service-item {
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  padding: 1.5rem 1.8rem;
+  width: 250px;
+  height: 220px; /* 👈 mantiene altura fija */
+  box-shadow: 0 6px 10px rgba(0,0,0,0.5);
+  transition: background-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  align-items: center; 
+}
+.service-item:hover {
+  background-color: rgb(178,34,34);
+  box-shadow: 0 8px 15px rgba(178,34,34,0.7);
+}
+
+/* 🔹 Contenido envolvente */
+.service-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+
+/* Icono */
+.service-icon {
+  display: block;
+  margin: 0 auto 10px;
+  width: 100px;
+  height: auto;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  min-width: 100px;
+}
+.service-iconM {
+  display: block;
+  margin: 0 auto 10px;
+  width: 100px;
+  height: auto;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  min-width: 140px;
+}
+
+/* Título */
+.service-item h4 {
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  font-size: 1.4rem;
+  color: #000000;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+/* Texto oculto al inicio */
+.service-item p {
+  font-weight: 400;
+  color: #fff;
+  font-size: 1rem;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  position: absolute;
+  top: 50%;       /* centrado vertical */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  text-align: center;
+}
+
+/* 🔹 Hover: oculta icono + título, muestra texto */
+.service-item:hover .service-icon,
+.service-item:hover h4 {
+  opacity: 0;
+}
+.service-item:hover p {
+  opacity: 1;
+}
+/* 🔹 Hover: oculta icono + título, muestra texto */
+.service-item:hover .service-iconM,
+.service-item:hover h4 {
+  opacity: 0;
+}
+.service-item:hover p {
+  opacity: 1;
+}
+
+
+    footer {
+      width: 100%;
+      background-color: rgb(178,34,34);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      box-shadow: 0 -4px 6px rgba(0,0,0,0.3);
+      flex-wrap: wrap;
+      gap: 1rem;
+      position: relative;
+      z-index: 100;
+    }
+    .social-link {
+      display: flex;
+      gap: 1rem;
+    }
+    .social-link a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #fff;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    }
+    .social-link a:hover {
+      background-color: rgb(255, 255, 255);
+    }
+    /* Tamaño de los íconos del footer */
+footer .social-link img {
+  width: 40px;   /* ajusta el tamaño (puedes probar con 24px o 40px) */
+  height: 40px;
+  object-fit: contain; /* mantiene proporción */
+}
+
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-text, .hero-image {
+        max-width: 100%;
+      }
+      nav {
+        gap: 1rem;
+      }
+      .service-list {
+        justify-content: center;
+      }
+    }
+
+
+.datos-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 40px;
+	box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+@media (max-width: 768px) {
+  .datos-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 20px;
+  }
+}
+.datos {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.3s;
+}
+
+.datos img {
+    width: 160px;
+    height: 160px;
+}
+
+.datos h3 {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.datos:hover {
+    transform: scale(1.05);
+}
+
+#modal {
+  position: absolute;
+  background: rgb(178,34,34);   /* Fondo rojo */
+  color: white;                /* Texto blanco */
+  padding: 20px;
+  border-radius: 10px;
+  opacity: 0;                  /* Invisible al inicio */
+  transform: translateX(-20px); /* 👈 empieza un poco a la izquierda */
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  width: 200px;
+  pointer-events: none;        /* 👈 evita clics cuando está oculto */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+#modal.show {
+  opacity: 1;
+  transform: translateX(0);   /* Se desliza suavemente */
+  pointer-events: auto;       /* Vuelve a aceptar clics */
+}
+
+#modal #modal-text {
+  font-size: 15px;
+  line-height: 1.4;
+  color: white;
+}
+
+.cerrar {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+}
+
+
+	 
+/* Estilo general para la sección de galería */
+#galeria {
+    padding: 20px;
+    background-color: #f9f9f9;
+    text-align: center;
+    margin-top: 50px; /* ajusta a tu necesidad */
+}
+
+/* Estilo para el título */
+#galeria h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: rgb(178,34,34);
+}
+
+/* Contenedor de imágenes */
+.imagenes-galeria {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 4 columnas */
+    gap: 27px; /* Espacio entre las cajas */
+    margin-bottom: 20px;
+}
+
+/* Estilo para cada imagen */
+.imagenes-galeria img {
+  width: 100%;              /* Se adapta al ancho del contenedor */
+  aspect-ratio: 1 / 1;      /* Mantiene la forma cuadrada */
+  object-fit: cover;        /* Rellena el cuadro sin deformarse */
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease; /* efecto suave al pasar el mouse */
+}
+
+.imagenes-galeria img:hover {
+  transform: scale(1.05);
+}
+
+
+
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+    .imagenes-galeria {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas pequeñas */
+    }
+}
+
+@media (max-width: 480px) {
+    .imagenes-galeria {
+        grid-template-columns: 1fr; /* 1 columna en móviles */
+    }
+}
+
+/* Estilo general para la sección de contacto */
+.contact-us {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrar el título */
+    padding: 20px;
+}
+
+/* Contenido principal de contacto */
+.contact-content {
+    display: flex;
+    align-items: center; /* Alinear verticalmente la imagen y la lista */
+    width: 100%;
+}
+
+/* Estilo para la ilustración */
+.illustration {
+    max-width: 500px; /* Ancho máximo de la ilustración */
+    margin-right: 50px; /* Espacio entre la ilustración y la lista */
+	margin-left: 120px;
+}
+
+/* Estilo para los enlaces sociales */
+.social-links {
+    display: flex;
+    flex-direction: column; /* Colocar la lista en formato vertical */
+}
+
+/* Estilo para el título */
+.social-links h2 {
+    font-size: 2rem; /* Tamaño grande para el título */
+    text-align: center; /* Centramos el texto */
+    margin-bottom: 20px; /* Espacio debajo del título */
+    color: rgb(178,34,34);
+}
+
+/* Estilo para la lista de enlaces */
+.social-links ul {
+    list-style-type: none; /* Sin viñetas */
+    padding: 0; /* Sin padding */
+    color: #000000;
+}
+
+/* Estilo para los elementos de la lista */
+.social-links li {
+    margin: 10px 0; /* Espacio entre los elementos de la lista */
+    color: #000000;
+}
+
+/* Estilo para los logos de las redes sociales */
+.social-logo {
+    width: 40px; /* Ancho de los logos */
+    margin-right: 15px; /* Espacio entre el logo y el texto */
+    vertical-align: middle; /* Alinear verticalmente el logo con el texto */
+}
+/* 🔹 Ajuste de alineación para "Contáctanos" en móviles */
+@media (max-width: 768px) {
+  .contact-content {
+    flex-direction: column;
+    align-items: center; /* centra todo el bloque */
+    text-align: center;  /* centra los títulos */
+  }
+
+  .social-links {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centra el bloque entero */
+    text-align: left;    /* texto alineado a la izquierda */
+  }
+
+  .social-links ul {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* íconos y texto alineados a la izquierda */
+    padding-left: 1rem;      /* pequeño margen a la izquierda */
+  }
+
+  .social-links li {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    width: 100%;
+    text-decoration: none;
+    color: #000;
+    font-size: 16px;
+  }
+
+  .social-logo {
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+  }
+}
+
+.social-links p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.logo-container {
+    flex-grow: 1;
+}
+.logo {
+    height: 50px; /* Ajusta la altura según sea necesario */
+    width: auto;  /* Mantiene la proporción del logo */
+    margin-right: 10px;
+    }
+/* Estilos para alinear icono + texto */
+.contacto-item {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.contacto-item a {
+  display: flex;
+  align-items: center;
+  color: #000; /* texto negro */
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contacto-item a:hover {
+  color: rgb(178,34,34); /* cambia a rojo al pasar el mouse */
+}
+
+.contacto-item img {
+  width: 35px;
+  height: 35px;
+  margin-right: 12px;
+}
+
+/* 🔹 Evita scroll horizontal y mejora adaptabilidad general */
+html, body {
+  overflow-x: hidden;
+}
+
+main {
+  padding: 1rem;
+}
+
+/* Ajuste del header y logo en móvil */
+@media (max-width: 480px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  header h1 {
+    font-size: 1.3rem;
+  }
+
+  .logo {
+    height: 40px;
+  }
+
+  nav a {
+    font-size: 0.9rem;
+  }
+}
+
+/* Ajuste de la ilustración en la sección de contacto */
+@media (max-width: 768px) {
+  .contact-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .illustration {
+    margin: 0 auto 20px;
+    max-width: 90%;
+  }
+
+  .social-links ul {
+    align-items: center;
+  }
+}
+
+/* Mejoras en la sección de datos */
+@media (max-width: 600px) {
+  .datos img {
+    width: 120px;
+    height: 120px;
+  }
+  .datos h3 {
+    font-size: 16px;
+  }
+}
+
+/* Ajustes para el footer */
+@media (max-width: 600px) {
+  footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0.8rem 1rem;
+    gap: 0.5rem;
+  }
+
+  footer span {
+    font-size: 0.9rem;
+  }
+
+  footer .social-link {
+    display: flex;
+    flex-direction: row; /* 🔹 mantiene los íconos en fila */
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  footer .social-link a img {
+    width: 30px;   /* 🔹 reduce tamaño para móviles */
+    height: 30px;
+  }
+}
+
+
+/* 🔹 Ajustes de Header y Menú Hamburguesa */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* 🔹 reduce el espacio entre logo y texto */
+}
+
+.logo {
+  height: 45px;
+  width: auto;
+}
+
+/* 🔹 Ícono del menú (hamburguesa) */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: rgb(178,34,34);
+  cursor: pointer;
+  margin-left: auto;
+}
+
+/* 🔹 Menú de navegación (escritorio) */
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* 🔹 Estilos móviles */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    order: 2; /* 🔹 mueve el icono a la derecha */
+  }
+
+  .logo-container {
+    flex: 1;
+  }
+
+  /* Menú oculto por defecto */
+  .nav-links {
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: white;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    padding: 1rem 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+  }
+
+  /* 🔹 En modo “abierto” */
+  .nav-links.show {
+    display: flex;
+    flex-direction: row; /* 🔹 los botones se ven en fila */
+    gap: 1rem;
+  }
+
+  .nav-links a {
+    color: rgb(178,34,34);
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  .nav-links a:hover {
+    background-color: rgb(178,34,34);
+    color: white;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+  
+
+  <header>
+  <div class="logo-container" style="display: flex; align-items: center;">
+    <img src="Imagenes/LOGO TA.png" alt="Logo de la Empresa" class="logo">
+    <h1><a href="#" style="color: inherit; text-decoration: none;">Transportes Angulo</a></h1>
+  </div>
+
+  <!-- Botón de menú hamburguesa -->
+  <button class="menu-toggle" aria-label="Abrir menú">
+    ☰
+  </button>
+
+  <!-- Menú de navegación -->
+  <nav aria-label="Menú principal" class="nav-links">
+    <a href="#servicios">Servicios</a>
+    <a href="#contacto">Contacto</a>
+    <a href="#galeria">Galería</a>
+  </nav>
+</header>
+
+<main>
+    <section class="hero" aria-label="Sección principal con imagen y descripción">
+      <article class="hero-text">
+        <h2>Servicio confiable de Mudanzas y Acarreos</h2>
+        <p>Nos encargamos de transportar tus pertenencias con cuidado y puntualidad. Contamos con vehículos adecuados y personal capacitado para hacer tu mudanza una experiencia sencilla y segura.</p>
+        <p>Contacto rápido por nuestras redes sociales para cotizaciones y más información.</p>
+      </article>
+      <figure class="hero-image" role="img" aria-label="Ilustración de un camión de mudanzas cargando cajas frente a una casa"> <img src="Imagenes/Ilustracion.png" alt="Ilustración digital colorida de un camión de mudanza rojo, representando servicio de transporte y acarreos." onerror="this.onerror=null;this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f5eb7269-1244-4e6e-9ba9-5aee58c61de2.png';" /> </figure>
+    </section>
+    <section class="datos-container">
+      <div class="datos"> <img src="Imagenes/Bogota.png" alt="Ubicación" />
+        <h3>Bogotá</h3>
+      </div>
+      <div class="datos"> <img src="Imagenes/Años de experiencia.png" alt="+13 Años" />
+        <h3>Experiencia</h3>
+      </div>
+      <div class="datos"> <img src="Imagenes/Seguridad.png" alt="Seguridad" />
+        <h3>Seguridad</h3>
+      </div>
+    </section>
+    <!-- Ventana modal -->
+    <!-- Ventana modal -->
+    <div id="modal"> <span class="cerrar">&times;</span>
+      <p id="modal-text">Aquí aparecerá el texto</p>
+    </div>
+    </div>
+    <section id="servicios" class="services" aria-labelledby="servicios-title">
+      <h3 id="servicios-title">Nuestros Servicios</h3>
+      <div class="service-list">
+        <article class="service-item servicio" aria-label="Servicio de Mudanzas Locales"> <img src="Imagenes/Mudanzas locales.png" alt="icono mudanzas locales" class="service-iconM">
+          <h4>Mudanzas Locales</h4>
+          <p>Atendemos tu mudanza dentro de la ciudad con rapidez y cuidado para tus pertenencias.</p>
+        </article>
+        <article class="service-item servicio" aria-label="Servicio de Acarreos Rápidos"> <img src="Imagenes/Acarreos rapidos.png" alt="icono acarreos rapidos" class="service-icon">
+          <h4>Acarreos Rápidos</h4>
+          <p>Transporte puntual y eficiente de muebles, electrodomésticos y objetos voluminosos.</p>
+        </article>
+        <article class="service-item servicio" aria-label="Servicio de Acarreos"> <img src="Imagenes/acarreos.png" alt="icono acarreos" class="service-icon">
+          <h4>Acarreos</h4>
+          <p>Nuestro servicio de acarreos te ofrece traslados confiables y organizados, adaptados a tus necesidades.</p>
+        </article>
+      </div>
+      <section id="galeria">
+        <h2>Galería</h2>
+        <div class="imagenes-galeria"> <img src="Imagenes/F Carro 2.png" alt="Descripción de la imagen 1"> <img src="Imagenes/F Carro 1.png" alt="Descripción de la imagen 2"> <img src="Imagenes/F Carro 5.png" alt="Descripción de la imagen 3"> <img src="Imagenes/F Carro 6.png" alt="Descripción de la imagen 4"> <img src="Imagenes/F Carro 3.png" alt="Descripción de la imagen 5"> <img src="Imagenes/F Carro 4.png" alt="Descripción de la imagen 6"> <img src="Imagenes/F Carro 7.png" alt="Descripción de la imagen 7"> <img src="Imagenes/F Carro 8.png" alt="Descripción de la imagen 8"> <img src="Imagenes/F Carro 9.png" alt="Descripción de la imagen 8"> </div>
+      </section>
+    </section>
+    <section class="contact-us">
+      <div class="contact-content"> <img src="Imagenes/Ilustracion 2.png" alt="Ilustración" class="illustration">
+        <div class="social-links">
+          <h2>Contáctanos</h2>
+          <ul>
+            <li> <a href="https://wa.me/573194550665" target="_blank"> <img src="Imagenes/social.png" alt="WhatsApp" class="social-logo"> <span>+57 319 455 0665</span> </a> </li>
+            <li> <a href="https://www.facebook.com/people/Transportes-Angulo/pfbid02kxFatqLFHCpRDUJK6aUEzFqVb4KGmrzxapyTee16e3hHV1uyEzbsTQ8cLQAsTmP1l/" target="_blank"> <img src="Imagenes/facebook.png" alt="Facebook" class="social-logo"> <span>Transportes Angulo</span> </a> </li>
+            <li> <a href="https://www.instagram.com/transportesangulo_?igsh=MWRsd2ZlaWFtN3Zsag==" target="_blank"> <img src="Imagenes/instagram.png" alt="Instagram" class="social-logo"> <span>@transportesangulo_</span> </a> </li>
+            <li> <a href="https://www.tiktok.com/@transportes.angul?_t=ZS-8zFF4Dcz5q4&_r=1" target="_blank"> <img src="Imagenes/tik-tok.png" alt="Tiktok" class="social-logo"> <span>@transportes.angul</span> </a> </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+<footer id="contacto" aria-label="Pie de página con redes sociales y contacto">
+  <span>© 2025 Transportes Angulo. Todos los derechos reservados.</span>
+  <nav class="social-link" aria-label="Redes sociales">
+      <a href="https://wa.me/573194550665" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp de la empresa">
+        <img src="Imagenes/1x/WHATSAPP ICONO 1.png" alt="icono de whatsapp">      
+      </a>
+      <a href="https://www.facebook.com/people/Transportes-Angulo/pfbid02kxFatqLFHCpRDUJK6aUEzFqVb4KGmrzxapyTee16e3hHV1uyEzbsTQ8cLQAsTmP1l/" target="_blank" rel="noopener noreferrer" aria-label="Facebook de la empresa">
+        <img src="Imagenes/1x/FACEBOOK ICONO 1.png" alt="icono de facebook">      
+      </a>
+      <a href="https://www.instagram.com/transportesangulo_?igsh=MWRsd2ZlaWFtN3Zsag==" target="_blank" rel="noopener noreferrer" aria-label="Instagram de la empresa">
+        <img src="Imagenes/1x/INSTAGRAM ICONO 1.png" alt="icono de instragram">      
+      </a>
+      <a href="https://www.tiktok.com/@transportes.angul?_t=ZS-8zFF4Dcz5q4&_r=1" target="_blank" rel="noopener noreferrer" aria-label="Instagram de la empresa">
+        <img src="Imagenes/1x/TIKTOK ICONO 1.png" alt="icono de tiktok">      
+      </a>
+    </nav>
+  </footer>
+  <script src="script.js"></script>
+
+</body>
+</html>
